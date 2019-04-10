@@ -74,10 +74,21 @@ module Mail
     end
     
     private
-    
-    def generate_message_id
-      "<#{Mail.random_tag}@#{::Socket.gethostname}.mail>"
+
+    def chartdesk_message_id
+      server_name = ::Socket.gethostname
+      return 'chartdesk.pro' if server_name.nil? || server_name.strip.empty?
+      if server_name.downcase.include?('sg')
+        "#{server_name.downcase}.chartdesk.pro"
+      elsif server_name.downcase.include?('qd')
+        "#{server_name.downcase}.chartdesk.cn"
+      else
+        "#{server_name.downcase}.chartdesk.pro"
+      end
     end
-    
+
+    def generate_message_id
+      "<#{Mail.random_tag}@#{chartdesk_message_id}>"
+    end
   end
 end
