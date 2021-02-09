@@ -2129,6 +2129,7 @@ module Mail
       content_type_name = header[:content_type].filename rescue nil
       content_disp_name = header[:content_disposition].filename rescue nil
       content_loc_name  = header[:content_location].location rescue nil
+      content_id_name   = header[:content_id].value rescue nil
       case
       when content_type && content_type_name
         filename = content_type_name
@@ -2136,6 +2137,8 @@ module Mail
         filename = content_disp_name
       when content_location && content_loc_name
         filename = content_loc_name
+      when content_id && content_id_name
+        filename = content_id_name
       else
         filename = nil
       end
