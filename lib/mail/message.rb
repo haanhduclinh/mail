@@ -2129,7 +2129,7 @@ module Mail
       content_type_name = header[:content_type].filename rescue nil
       content_disp_name = header[:content_disposition].filename rescue nil
       content_loc_name  = header[:content_location].location rescue nil
-      content_type_value = header[:content_type].value rescue nil
+      content_type_main_type = header[:content_type].main_type rescue nil
       case
       when content_type && content_type_name
         filename = content_type_name
@@ -2137,7 +2137,7 @@ module Mail
         filename = content_disp_name
       when content_location && content_loc_name
         filename = content_loc_name
-      when content_type_value == "image/gif"
+      when content_type_main_type == "image"
         filename = "no_name"
       else
         filename = nil
